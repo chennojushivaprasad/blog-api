@@ -1,0 +1,16 @@
+import express from "express";
+import {  getAllBlogs, getBlog, addBlog, updateBlog ,deleteBlog} from "../controllers/blog-controller";
+
+const blogRouter = express.Router()
+
+blogRouter.get("/",getAllBlogs)
+blogRouter.get("/:id",getBlog)
+
+blogRouter.post("/add",addBlog)
+
+blogRouter.put("/update/:id",updateBlog)
+
+blogRouter.delete("/delete/:id",deleteBlog)
+
+
+export default blogRouter
