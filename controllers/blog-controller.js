@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import Blog from "../model/blogs";
-import User from "../model/user";
+import Blog from "../model/blogs.js";
+import User from "../model/user.js";
 
 // Blog is a collection
 
