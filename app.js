@@ -17,7 +17,7 @@ const app = express();
 
 // app.use(express.json()) application doesnt know what type of data is recieving require( req.body
 // so to tell the application that we are recieving json body and it will parse all data into json format
-app.use(cors())
+app.use(cors({origin:"http://127.0.0.1:3004"}))
 app.use(express.json());
 
 
