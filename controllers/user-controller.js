@@ -51,7 +51,7 @@ const signup = async (req, res, next) => {
     console.log(error);
   }
 
-  return res.status(201).json({ user });
+  return res.status(201).json({ok:true}).json({ user });
 };
 
 const deleteUser = async (req, res, next) => {
@@ -72,6 +72,7 @@ const deleteUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email,password)
   let emailExists;
   try {
     emailExists = await User.findOne({ email });
@@ -83,10 +84,13 @@ const login = async (req, res, next) => {
     return res.status(401).json("password does not match");
   }
 
-  const isValid = await bcrypt.compare(password, emailExists.password);
+
+  const userData = emailExists
+
+  const isValid = await bcrypt.compare(password, userData.password);
 
   if (isValid) {
-    return res.status(200).json({ message: "logged in successfully" });
+    return res.status(200).json({ message: "logged in successfully" ,userId:userData._id});
   }
 };
 
