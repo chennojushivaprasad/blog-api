@@ -4,6 +4,23 @@ const bcrypt = require("bcrypt");
 
 //here User is users colletion
 
+
+const getUser = async (req, res, next) => {
+  const userId = req.params.id;
+  let users;
+  try {
+    //  User
+    users = await User.findById(userId); // select * from User
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!users) {
+    return res.status(404).json({ message: "no users found" });
+  }
+  return res.status(200).json({ users });
+};
+
 // getAlluser to get all users from collection in sql its like select * from User
 const getAllUser = async (req, res, next) => {
   let users;
@@ -97,4 +114,5 @@ const login = async (req, res, next) => {
 module.exports.login = login;
 module.exports.signup = signup;
 module.exports.deleteUser = deleteUser;
+module.exports.getUser = getUser;
 module.exports.getAllUser = getAllUser;
