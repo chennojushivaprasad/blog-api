@@ -6,6 +6,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+app.use(cors());
+                                                     
 const DATABASE = process.env.MONGO_URL;
 const PORT = process.env.PORT || 3005;
 
@@ -17,7 +20,6 @@ const app = express();
 // so to tell the application that we are recieving json body and it will parse all data into json format
 app.use(express.json());
 
-app.use(cors({origin:"http://localhost:3004",method:["GET","POST","PUT,"DELETE"}));
 
 app.use("/api/user", userRouter);
 app.use("/api/blog", blogRouter);
