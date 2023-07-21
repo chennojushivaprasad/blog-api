@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose = require( "mongoose");
 
 const Schema = mongoose.Schema
 
@@ -13,4 +12,5 @@ const blogsSchema = new Schema({
 
 }) 
 
-export default mongoose.model('Blog',blogsSchema)
+const blogModel =  mongoose.model('Blog',blogsSchema)
+module.exports = blogModel

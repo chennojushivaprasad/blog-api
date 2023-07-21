@@ -1,11 +1,11 @@
-import User from "../model/user.js";
+const User = require("../model/user");
 
-import bcrypt from "bcrypt";
+const bcrypt = require("bcrypt");
 
 //here User is users colletion
 
 // getAlluser to get all users from collection in sql its like select * from User
-export const getAllUser = async (req, res, next) => {
+const getAllUser = async (req, res, next) => {
   let users;
   try {
     //  User
@@ -20,7 +20,7 @@ export const getAllUser = async (req, res, next) => {
 };
 
 // signup adding user to database in sql its like insert into (username,email,password) values ("hsfj","afk","afjjf")
-export const signup = async (req, res, next) => {
+const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   let existingUsers;
@@ -42,7 +42,7 @@ export const signup = async (req, res, next) => {
     username,
     email,
     password: hashedPassword, // for security reason we are enctyptying password
-    blogs:[]
+    blogs: [],
   });
 
   try {
@@ -54,24 +54,23 @@ export const signup = async (req, res, next) => {
   return res.status(201).json({ user });
 };
 
-export const deleteUser = async (req,res,next)=> {
-  const {id} = req.params
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
 
-  console.log(id,"id")
-  let deleted ;
-  try{
-    deleted =  await User.findByIdAndDelete(id )       
-    console.log("deleted",deleted)
+  console.log(id, "id");
+  let deleted;
+  try {
+    deleted = await User.findByIdAndDelete(id);
+    console.log("deleted", deleted);
+  } catch (err) {
+    console.log("error", err);
+    return res.status(400).json({ message: "unable to delete" });
   }
-  catch(err){
-    console.log("error",err)
-   return res.status(400).json({message:"unable to delete"})
-  }
 
-  res.status(200).json("deleted successfully")
-}
+  res.status(200).json("deleted successfully");
+};
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
   let emailExists;
   try {
@@ -80,8 +79,7 @@ export const login = async (req, res, next) => {
     console.log(err);
   }
 
-
-  if (!emailExists ) {
+  if (!emailExists) {
     return res.status(401).json("password does not match");
   }
 
@@ -92,3 +90,7 @@ export const login = async (req, res, next) => {
   }
 };
 
+module.exports.login = login;
+module.exports.signup = signup;
+module.exports.deleteUser = deleteUser;
+module.exports.getAllUser = getAllUser;

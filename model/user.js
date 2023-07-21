@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-
+const mongoose = require( "mongoose");
 
 // Calling Schema class
 const Schema = mongoose.Schema; // class
@@ -23,4 +21,4 @@ const userSchema = new Schema({
 // here User or users is a Collection and userSchema is a collection structure
 const userModel = mongoose.model("User", userSchema);
 
-export default userModel
+module.exports = userModel

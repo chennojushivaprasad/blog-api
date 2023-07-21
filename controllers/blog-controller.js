@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
-import Blog from "../model/blogs.js";
-import User from "../model/user.js";
+const mongoose= require("mongoose");
+const Blog = require( "../model/blogs");
+const User = require ("../model/user");
 
 // Blog is a collection
 
 
-export const getBlog = async (req, res, next) => {
+ const getBlog = async (req, res, next) => {
   const blogId = req.params.id;
   let blog;
   try {
@@ -21,7 +21,7 @@ export const getBlog = async (req, res, next) => {
   return res.status(400).json("no data found");
 };
 
-export const getAllBlogs = async (req, res, next) => {
+ const getAllBlogs = async (req, res, next) => {
   let blogs;
   try {
     blogs = await Blog.find(); //  sqlite select * from Blog
@@ -35,7 +35,7 @@ export const getAllBlogs = async (req, res, next) => {
   return res.status(400).json("no data found");
 };
 
-export const addBlog = async (req, res, next) => {
+ const addBlog = async (req, res, next) => {
   const { title, imgUrl, description, user } = req.body;
 
   let existingUser;
@@ -72,7 +72,7 @@ export const addBlog = async (req, res, next) => {
   return res.status(201).json({ message: "blog added successfully" });
 };
 
-export const updateBlog = async (req, res, next) => {
+ const updateBlog = async (req, res, next) => {
   const { title, description } = req.body;
   const blogId = req.params.id;
 
@@ -90,7 +90,7 @@ export const updateBlog = async (req, res, next) => {
   return res.status(201).json({ blog });
 };
 
-export const deleteBlog = async (req, res, next) => {
+const deleteBlog = async (req, res, next) => {
   const blogId = req.params.id;
   let blog;
   try {
@@ -106,3 +106,10 @@ export const deleteBlog = async (req, res, next) => {
   }
   return res.status(200).json({ message: "deleted succesfully" });
 };
+
+
+module.exports.getBlog = getBlog;
+module.exports.getAllBlogs = getAllBlogs;
+module.exports.addBlog = addBlog;
+module.exports.updateBlog = updateBlog;
+module.exports.deleteBlog = deleteBlog;
