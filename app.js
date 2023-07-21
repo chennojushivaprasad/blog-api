@@ -6,7 +6,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config()
 
-const DATABASE = process.env.DATABASE
+const DATABASE = process.env.MONGO_URL
 const PORT = process.env.PORT || 3005;
 
 

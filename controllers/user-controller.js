@@ -54,6 +54,23 @@ export const signup = async (req, res, next) => {
   return res.status(201).json({ user });
 };
 
+export const deleteUser = async (req,res,next)=> {
+  const {id} = req.params
+
+  console.log(id,"id")
+  let deleted ;
+  try{
+    deleted =  await User.findByIdAndDelete(id )       
+    console.log("deleted",deleted)
+  }
+  catch(err){
+    console.log("error",err)
+   return res.status(400).json({message:"unable to delete"})
+  }
+
+  res.status(200).json("deleted successfully")
+}
+
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
   let emailExists;
@@ -74,3 +91,4 @@ export const login = async (req, res, next) => {
     return res.status(200).json({ message: "logged in successfully" });
   }
 };
+

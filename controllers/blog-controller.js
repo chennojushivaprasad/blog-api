@@ -17,6 +17,7 @@ export const getBlog = async (req, res, next) => {
     return res.status(200).send(blog);
   }
 
+  console.log("blog item")
   return res.status(400).json("no data found");
 };
 
