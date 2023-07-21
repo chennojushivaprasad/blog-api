@@ -17,7 +17,7 @@ const app = express();
 // so to tell the application that we are recieving json body and it will parse all data into json format
 app.use(express.json());
 
-app.use(cors({origin:"http://localhost:3004",}));
+app.use(cors({origin:"http://localhost:3004",method:["GET","POST","PUT,"DELETE"}));
 
 app.use("/api/user", userRouter);
 app.use("/api/blog", blogRouter);
