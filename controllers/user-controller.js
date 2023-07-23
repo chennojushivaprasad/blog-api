@@ -36,7 +36,7 @@ const getAllUser = async (req, res, next) => {
   return res.status(200).json({ users });
 };
 
-// signup adding user to database in sql its like insert into (username,email,password) values ("hsfj","afk","afjjf")
+// signup adding user to database in sql its like insert into (username,email,password) values ("xxx","xxxx","xxxx")
 const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
@@ -89,6 +89,9 @@ const deleteUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
+   res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', "*");
+  
   console.log(email,password)
   let emailExists;
   try {
