@@ -89,8 +89,11 @@ const deleteUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-   res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Headers', "*");
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+res.setHeader('Access-Control-Allow-Credentials', true); // you probably dont want this one unless there is auth/cookies involved
+res.setHeader('Access-Control-Allow-Methods', 'GET,PATCH,POST,PUT,DELETE');
   
   console.log(email,password)
   let emailExists;
